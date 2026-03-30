@@ -305,7 +305,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <!-- ══ RESULTS ══ -->
 <div id="results" class="page hidden locked">
-  <button class="back-btn" id="backBtnResults" onclick="goHome()"></button>
   <h1 class="results-title" id="resultsTitle"></h1>
   <p class="results-sub" id="resultsSub"></p>
 
@@ -334,12 +333,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div class="chart-card">
       <div class="chart-title" id="lblRadar"></div>
       <canvas id="radarChart" width="260" height="260" class="blur-target"></canvas>
-      <div class="lock-overlay"><span class="lock-badge" id="lblLock1"></span></div>
+      <div class="lock-overlay" onclick="scrollToOffer()" style="cursor:pointer;">
+        <span class="lock-badge" id="lblLock1"></span>
+      </div>
     </div>
     <div class="breakdown-card">
       <div class="chart-title" id="lblBreakdown"></div>
       <div id="breakdownList"></div>
-      <div class="lock-overlay"><span class="lock-badge" id="lblLock2"></span></div>
+      <div class="lock-overlay" onclick="scrollToOffer()" style="cursor:pointer;">
+        <span class="lock-badge" id="lblLock2"></span>
+      </div>
     </div>
   </div>
 
@@ -347,7 +350,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <div id="weaknessAlert" class="weakness-alert"></div>
 
   <!-- ══ OFFER BOX ══ -->
-  <div class="offer-box">
+  <div class="offer-box" id="offerBox">
     <div class="offer-inner">
       <div class="offer-title" id="offerTitle"></div>
       <p class="offer-sub" id="offerSub"></p>
@@ -365,7 +368,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
       <div id="couponSection">
         <button class="pay-btn" onclick="openPayModal()" id="offerCTA"></button>
         <p class="trial-note" style="margin-top:12px;" id="offerTrialNote"></p>
-        <p style="font-size:10px;color:var(--muted);margin-top:10px;" id="offerSecure"></p>
+        <p style="font-size:10px;color:var(--muted);margin-top:10px;text-align:center;" id="offerSecure"></p>
       </div>
 
       <!-- Download area (shown after unlock) -->
@@ -635,7 +638,7 @@ function setLang(l){
   S('backBtnQuiz',d.back);S('nextBtn',d.nextBtn);
 
   // RESULTS — static labels
-  S('backBtnResults',d.back);S('resultsTitle',d.resultsTitle);
+  S('resultsTitle',d.resultsTitle);
   S('lblCorrect',d.lblCorrect);S('lblIncorrect',d.lblIncorrect);
   S('lblAccuracy',d.lblAccuracy);S('lblAvgQ',d.lblAvgQ);
   S('lblRadar',d.lblRadar);S('lblBreakdown',d.lblBreakdown);
@@ -670,6 +673,7 @@ function goHome(){clearInterval(qTimer);show('home');}
 
 /* ─── QUIZ ──────────────────────────────────── */
 function startQuiz(){
+  clearState();
   currentQ=0;
   userAnswers=Array(QB[lang].length).fill(null);
   dotStates=Array(QB[lang].length).fill(null);
@@ -721,21 +725,28 @@ function startTimer(){qTimer=setInterval(()=>{qSeconds--;updateTimer(qSeconds);i
 function updateTimer(s){const el=document.getElementById('timerDisplay');el.textContent=s+'s';el.className='timer-badge'+(s<=8?' warn':'');}
 
 function selectAnswer(idx){
-  if(userAnswers[currentQ]!==null)return;
   clearInterval(qTimer);
-  totalTimeSpent+=Math.round((Date.now()-qStartTime)/1000);
+  // If first selection, start tracking time
+  if(userAnswers[currentQ]===null){
+    totalTimeSpent+=Math.round((Date.now()-qStartTime)/1000);
+    // Restart the timer fresh for this question (paused while answering)
+    qStartTime=Date.now()-((35-qSeconds)*1000);
+  }
   userAnswers[currentQ]=idx;
-  // Store dot state for later reveal
+  // Store dot state (updates on every re-selection)
   const q=QB[lang][currentQ];
   dotStates[currentQ]={selected:idx, correct:q.ans, isRight:idx===q.ans};
-  // Visual: just highlight selected — NO green/red
+  // Visual: highlight selected only — NO green/red reveal yet
   document.querySelectorAll('.opt-btn').forEach((b,i)=>{
     b.classList.remove('selected');
     if(i===idx) b.classList.add('selected');
   });
-  // Dot: neutral "answered" indicator only
-  document.getElementById('dot_'+currentQ).classList.add('answered-dot');
+  // Dot: neutral answered indicator
+  const dot=document.getElementById('dot_'+currentQ);
+  dot.classList.remove('answered-dot');dot.classList.add('answered-dot');
   document.getElementById('nextBtn').classList.remove('hidden');
+  // Save state on every answer
+  saveState();
 }
 
 function autoAdvance(){
@@ -744,11 +755,16 @@ function autoAdvance(){
     totalTimeSpent+=35;
     dotStates[currentQ]={selected:-1, correct:QB[lang][currentQ].ans, isRight:false};
     document.getElementById('dot_'+currentQ).classList.add('answered-dot');
+    saveState();
   }
   nextQuestion();
 }
-function nextQuestion(){if(currentQ<QB[lang].length-1){currentQ++;loadQuestion(currentQ);}else finishQuiz();}
-function finishQuiz(){clearInterval(qTimer);show('results');renderResults();}
+function nextQuestion(){
+  saveState();
+  if(currentQ<QB[lang].length-1){currentQ++;loadQuestion(currentQ);}
+  else finishQuiz();
+}
+function finishQuiz(){clearInterval(qTimer);show('results');renderResults();saveState();}
 
 /* ─── RESULTS ───────────────────────────────── */
 function renderResults(){
@@ -901,16 +917,15 @@ function unlockResults(){
   const res=document.getElementById('results');
   res.classList.remove('locked');
   res.classList.add('unlocked');
-  // Swap coupon section for download area
   document.getElementById('couponSection').classList.add('hidden');
   document.getElementById('downloadArea').classList.remove('hidden');
-  // Update dots to show correct/wrong
   dotStates.forEach((ds,i)=>{
     const dot=document.getElementById('dot_'+i);
     if(!dot||!ds)return;
     dot.classList.remove('answered-dot');
     dot.classList.add(ds.isRight?'correct-dot':'wrong-dot');
   });
+  saveState();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -1079,8 +1094,105 @@ function makePDF(entries){
   return bytes;
 }
 
+/* ─── SCROLL TO OFFER ────────────────────────── */
+function scrollToOffer(){
+  const el=document.getElementById('offerBox');
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ─── LOCALSTORAGE PERSISTENCE ───────────────── */
+const LS_KEY='ugcnet_state';
+
+function saveState(){
+  try{
+    const state={
+      lang,
+      currentQ,
+      userAnswers,
+      dotStates,
+      totalTimeSpent,
+      savedResults,
+      isUnlocked,
+      page: document.getElementById('results').classList.contains('hidden')?
+            (document.getElementById('quiz').classList.contains('hidden')?'home':'quiz'):'results'
+    };
+    localStorage.setItem(LS_KEY,JSON.stringify(state));
+  }catch(e){}
+}
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    if(!raw)return false;
+    const state=JSON.parse(raw);
+    if(!state||!state.userAnswers||!state.userAnswers.length)return false;
+
+    lang=state.lang||'en';
+    setLang(lang);
+
+    userAnswers=state.userAnswers;
+    dotStates=state.dotStates||[];
+    totalTimeSpent=state.totalTimeSpent||0;
+    isUnlocked=state.isUnlocked||false;
+    savedResults=state.savedResults||null;
+
+    if(state.page==='results'&&savedResults){
+      // Restore results page
+      show('results');
+      renderResults();
+      if(isUnlocked){
+        const res=document.getElementById('results');
+        res.classList.remove('locked');res.classList.add('unlocked');
+        document.getElementById('couponSection').classList.add('hidden');
+        document.getElementById('downloadArea').classList.remove('hidden');
+        // Restore dots correct/wrong
+        dotStates.forEach((ds,i)=>{
+          const dot=document.getElementById('dot_'+i);
+          if(!dot||!ds)return;
+          dot.classList.remove('answered-dot');
+          dot.classList.add(ds.isRight?'correct-dot':'wrong-dot');
+        });
+      }
+      return true;
+    } else if(state.page==='quiz'){
+      // Restore quiz at current question
+      currentQ=state.currentQ||0;
+      buildDots(QB[lang].length);
+      show('quiz');
+      // Restore all dot states first
+      dotStates.forEach((ds,i)=>{
+        if(!ds)return;
+        const dot=document.getElementById('dot_'+i);
+        if(dot)dot.classList.add('answered-dot');
+      });
+      loadQuestion(currentQ);
+      // Re-apply selected state if this question was already answered
+      if(userAnswers[currentQ]!==null&&userAnswers[currentQ]!==-1){
+        const sel=userAnswers[currentQ];
+        setTimeout(()=>{
+          document.querySelectorAll('.opt-btn').forEach((b,i)=>{
+            b.classList.remove('selected');
+            if(i===sel)b.classList.add('selected');
+          });
+          document.getElementById('nextBtn').classList.remove('hidden');
+        },50);
+      }
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+
+function clearState(){
+  try{localStorage.removeItem(LS_KEY);}catch(e){}
+}
+
 /* ─── INIT ──────────────────────────────────── */
 setLang('en');
+if(!loadState()){
+  // Fresh start — just show home
+  show('home');
+}
 </script>
 </body>
 </html>
