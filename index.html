@@ -164,25 +164,47 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   backdrop-filter:blur(4px);
 }
 
-/* ── PDF / UNLOCK BOX ── */
-.pdf-box{background:linear-gradient(135deg,rgba(139,111,212,.12),rgba(232,160,32,.05));border:1px solid rgba(139,111,212,.28);border-radius:18px;padding:32px;text-align:center;position:relative;overflow:hidden;margin-bottom:28px;}
-.pdf-box::after{content:'';position:absolute;top:-60%;left:-60%;width:220%;height:220%;background:conic-gradient(from 0deg,transparent 60%,rgba(139,111,212,.04) 70%,transparent 80%);animation:rotateBG 10s linear infinite;pointer-events:none;}
+/* ── OFFER BOX ── */
+.offer-box{background:linear-gradient(135deg,rgba(139,111,212,.13),rgba(232,160,32,.06));border:1px solid rgba(139,111,212,.3);border-radius:20px;padding:32px 28px;position:relative;overflow:hidden;margin-bottom:28px;}
+.offer-box::after{content:'';position:absolute;top:-60%;left:-60%;width:220%;height:220%;background:conic-gradient(from 0deg,transparent 60%,rgba(139,111,212,.04) 70%,transparent 80%);animation:rotateBG 10s linear infinite;pointer-events:none;}
 @keyframes rotateBG{to{transform:rotate(360deg);}}
-.pdf-inner{position:relative;z-index:1;}
-.pdf-eyebrow{font-size:10px;color:var(--violet);font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;}
-.pdf-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;margin-bottom:10px;}
-.pdf-sub{color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:18px;max-width:420px;margin-left:auto;margin-right:auto;}
-.pdf-feats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px;}
-.pdf-feat{font-size:11px;padding:5px 12px;border-radius:100px;background:rgba(139,111,212,.1);color:#c4b0f0;border:1px solid rgba(139,111,212,.2);}
+.offer-inner{position:relative;z-index:1;}
+.offer-eyebrow{font-size:10px;color:var(--violet);font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;text-align:center;}
+.offer-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;margin-bottom:8px;text-align:center;line-height:1.3;}
+.offer-sub{color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:18px;text-align:center;max-width:460px;margin-left:auto;margin-right:auto;}
+.offer-feats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:22px;}
+.offer-feat{font-size:11px;padding:5px 12px;border-radius:100px;background:rgba(139,111,212,.1);color:#c4b0f0;border:1px solid rgba(139,111,212,.2);}
+
+/* PRICE ROW */
+.price-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px;}
+.price-orig{font-size:15px;color:var(--muted);text-decoration:line-through;}
+.price-now{font-family:'Playfair Display',serif;font-size:2.6rem;color:var(--gold);font-weight:700;line-height:1;}
+.price-badge-pill{background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.3);color:#2ecc71;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:100px;text-transform:uppercase;}
+.price-sub{text-align:center;font-size:11px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+
+/* TWO-COL UNLOCK */
+.unlock-cols{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start;max-width:540px;margin:0 auto;}
+@media(max-width:560px){.unlock-cols{grid-template-columns:1fr;gap:16px;}.divider-col{display:none!important;}}
+.unlock-col{display:flex;flex-direction:column;gap:10px;}
+.unlock-col-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;text-align:center;}
+.divider-col{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 18px;gap:6px;}
+.div-line{width:1px;flex:1;background:var(--border);}
+.div-or{font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap;}
+
+/* PAY BTN */
+.pay-btn{width:100%;padding:13px 20px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a0e00;font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .2s;letter-spacing:.3px;}
+.pay-btn:hover{transform:scale(1.03);box-shadow:0 8px 24px rgba(232,160,32,.35);}
+.trial-note{font-size:10.5px;color:var(--muted);text-align:center;line-height:1.5;}
 
 /* COUPON */
-.coupon-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px;}
-.coupon-input{background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;padding:11px 18px;color:var(--text);font-size:14px;font-family:'IBM Plex Mono',monospace;outline:none;width:180px;text-transform:uppercase;letter-spacing:2px;text-align:center;transition:border-color .2s;}
+.coupon-input{width:100%;background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-size:13px;font-family:'IBM Plex Mono',monospace;outline:none;text-transform:uppercase;letter-spacing:2px;text-align:center;transition:border-color .2s;}
 .coupon-input:focus{border-color:var(--violet);}
 .coupon-input.shake{animation:shake .4s ease;}
 @keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-7px);}40%,80%{transform:translateX(7px);}}
 .coupon-input.ok-state{border-color:#2ecc71;color:#2ecc71;}
-.coupon-msg{font-size:12px;margin-top:6px;min-height:18px;}
+.apply-btn{width:100%;padding:12px;border-radius:8px;background:var(--bg3);border:1.5px solid var(--violet);color:#c4b0f0;font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.apply-btn:hover{background:rgba(139,111,212,.15);border-color:#a080e8;}
+.coupon-msg{font-size:11px;margin-top:5px;min-height:16px;text-align:center;}
 .coupon-msg.err{color:var(--crimson);}
 .coupon-msg.ok{color:#2ecc71;}
 
@@ -190,8 +212,43 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .dl-area{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:4px;animation:slideUp .35s ease;}
 .dl-note{font-size:11px;color:var(--muted);}
 
-/* Retry */
-.retry-row{text-align:center;margin-top:4px;}
+/* PAYMENT MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:32px 28px;max-width:400px;width:100%;position:relative;animation:slideUp .3s ease;}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;transition:color .2s;line-height:1;}
+.modal-close:hover{color:var(--text);}
+.modal-header{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+.modal-logo{width:40px;height:40px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;}
+.modal-sub{font-size:11px;color:var(--muted);}
+.modal-amount-box{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;margin-bottom:22px;}
+.modal-amount{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);}
+.modal-amount-desc{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5;}
+.modal-methods{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.modal-method{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg3);border:1.5px solid rgba(255,255,255,.07);border-radius:10px;cursor:pointer;transition:all .2s;}
+.modal-method.active{border-color:var(--gold);background:rgba(232,160,32,.06);}
+.modal-method-icon{font-size:18px;width:28px;text-align:center;}
+.modal-method-name{font-size:13px;color:var(--text);font-weight:500;flex:1;}
+.modal-method-sub{font-size:10px;color:var(--muted);}
+.modal-radio{width:14px;height:14px;border-radius:50%;border:2px solid var(--muted);transition:all .2s;flex-shrink:0;}
+.modal-method.active .modal-radio{border-color:var(--gold);background:var(--gold);}
+.upi-field{width:100%;background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-size:13px;font-family:'IBM Plex Mono',monospace;outline:none;margin-bottom:14px;transition:border-color .2s;}
+.upi-field:focus{border-color:var(--gold);}
+.modal-pay-btn{width:100%;padding:14px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a0e00;font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .2s;}
+.modal-pay-btn:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(232,160,32,.3);}
+.modal-pay-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.modal-secure{text-align:center;font-size:10px;color:var(--muted);margin-top:10px;}
+/* Processing state */
+.modal-processing{text-align:center;padding:20px 0;}
+.processing-spinner{font-size:44px;margin-bottom:14px;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.processing-bar{height:4px;background:var(--bg3);border-radius:100px;overflow:hidden;margin:16px 0 8px;}
+.processing-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:100px;width:0%;transition:width 2.2s ease;}
+/* Success state */
+.modal-success{text-align:center;padding:16px 0;}
+.success-emoji{font-size:52px;margin-bottom:12px;animation:popIn .4s cubic-bezier(.2,1.4,.5,1);}
+@keyframes popIn{from{transform:scale(0);}to{transform:scale(1);}}
 
 @keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
 </style>
@@ -221,7 +278,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 <!-- ══ QUIZ ══ -->
 <div id="quiz" class="page hidden">
-  <button class="back-btn" onclick="goHome()">← Back</button>
+  <button class="back-btn" id="backBtnQuiz" onclick="goHome()"></button>
   <div class="quiz-top">
     <div>
       <div class="quiz-unit-lbl" id="qUnitKey"></div>
@@ -242,92 +299,150 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
   <div class="quiz-nav">
     <span class="q-counter" id="qCounter"></span>
-    <button class="btn btn-gold hidden" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    <button class="btn btn-gold hidden" id="nextBtn" onclick="nextQuestion()"></button>
   </div>
 </div>
 
 <!-- ══ RESULTS ══ -->
 <div id="results" class="page hidden locked">
-  <button class="back-btn" onclick="goHome()">← Back</button>
-  <h1 class="results-title">Your Diagnostic Report</h1>
+  <button class="back-btn" id="backBtnResults" onclick="goHome()"></button>
+  <h1 class="results-title" id="resultsTitle"></h1>
   <p class="results-sub" id="resultsSub"></p>
 
-  <!-- Score cards — labels visible, values blurred -->
+  <!-- Score cards -->
   <div class="score-hero">
     <div class="score-card">
       <div class="score-val blur-target" style="color:var(--gold)" id="scoreCorrect">—</div>
-      <div class="score-lbl">Correct</div>
+      <div class="score-lbl" id="lblCorrect"></div>
     </div>
     <div class="score-card">
       <div class="score-val blur-target" style="color:var(--crimson)" id="scoreWrong">—</div>
-      <div class="score-lbl">Incorrect</div>
+      <div class="score-lbl" id="lblIncorrect"></div>
     </div>
     <div class="score-card">
       <div class="score-val blur-target" style="color:var(--teal)" id="scorePct">—</div>
-      <div class="score-lbl">Accuracy</div>
+      <div class="score-lbl" id="lblAccuracy"></div>
     </div>
     <div class="score-card">
       <div class="score-val blur-target" style="color:var(--violet)" id="scoreTime">—</div>
-      <div class="score-lbl">Avg / Qn</div>
+      <div class="score-lbl" id="lblAvgQ"></div>
     </div>
   </div>
 
   <!-- Radar + Breakdown -->
   <div class="results-grid">
     <div class="chart-card">
-      <div class="chart-title">Performance Radar</div>
+      <div class="chart-title" id="lblRadar"></div>
       <canvas id="radarChart" width="260" height="260" class="blur-target"></canvas>
-      <div class="lock-overlay"><span class="lock-badge">🔒 Use coupon to reveal</span></div>
+      <div class="lock-overlay"><span class="lock-badge" id="lblLock1"></span></div>
     </div>
     <div class="breakdown-card">
-      <div class="chart-title">Unit Breakdown</div>
+      <div class="chart-title" id="lblBreakdown"></div>
       <div id="breakdownList"></div>
-      <div class="lock-overlay"><span class="lock-badge">🔒 Use coupon to reveal</span></div>
+      <div class="lock-overlay"><span class="lock-badge" id="lblLock2"></span></div>
     </div>
   </div>
 
   <!-- Weak Zones -->
   <div id="weaknessAlert" class="weakness-alert"></div>
 
-  <!-- PDF / Coupon Box -->
-  <div class="pdf-box">
-    <div class="pdf-inner">
-      <div class="pdf-eyebrow">📄 Your Personalised Report</div>
-      <div class="pdf-title">Complete Preparation Report</div>
-      <p class="pdf-sub">Year-wise weightage 2019–2024, all 10 unit deep-dives, past exam patterns, and your custom 45+ marks strategy — personalised from your results.</p>
-      <div class="pdf-feats">
-        <span class="pdf-feat">Year-wise Weightage 2019–2024</span>
-        <span class="pdf-feat">All 10 Unit Deep Analysis</span>
-        <span class="pdf-feat">45+ Marks Study Plan</span>
-        <span class="pdf-feat">Past Paper Patterns</span>
-        <span class="pdf-feat">High-Yield Topics per Unit</span>
-        <span class="pdf-feat">Personalised Weak Zone Tips</span>
-      </div>
+  <!-- ══ OFFER BOX ══ -->
+  <div class="offer-box">
+    <div class="offer-inner">
+      <div class="offer-title" id="offerTitle"></div>
+      <p class="offer-sub" id="offerSub"></p>
+      <div class="offer-feats" id="offerFeats"></div>
 
-      <!-- Coupon section (shown when locked) -->
+      <!-- Price -->
+      <div class="price-row">
+        <span class="price-orig">₹299</span>
+        <span class="price-now">₹1</span>
+        <span class="price-badge-pill">99.7% off</span>
+      </div>
+      <p class="price-sub" id="offerPriceSub"></p>
+
+      <!-- CTA (shown when locked) -->
       <div id="couponSection">
-        <p style="font-size:12px;color:var(--muted);margin-bottom:14px;" id="lCouponPrompt"></p>
-        <div class="coupon-row">
-          <input class="coupon-input" id="couponInput" placeholder="COUPON CODE" maxlength="12"
-            oninput="this.value=this.value.toUpperCase()"
-            onkeydown="if(event.key==='Enter')applyCoupon()"/>
-          <button class="btn btn-violet" onclick="applyCoupon()" id="lApplyBtn"></button>
-        </div>
-        <div class="coupon-msg" id="couponMsg"></div>
-        <p style="font-size:11px;color:var(--muted);margin-top:10px;">🔒 Report generated on-device · No data shared</p>
+        <button class="pay-btn" onclick="openPayModal()" id="offerCTA"></button>
+        <p class="trial-note" style="margin-top:12px;" id="offerTrialNote"></p>
+        <p style="font-size:10px;color:var(--muted);margin-top:10px;" id="offerSecure"></p>
       </div>
 
       <!-- Download area (shown after unlock) -->
       <div id="downloadArea" class="hidden dl-area">
-        <p style="font-size:13px;color:#2ecc71;font-weight:600;">✅ Unlocked! Your full report is ready.</p>
-        <button class="btn btn-green" id="dlBtn" onclick="downloadPDF()" style="font-size:15px;padding:14px 36px;">⬇ Download PDF Report</button>
-        <p class="dl-note">Instant PDF · Generated from your results · No login needed</p>
+        <p style="font-size:13px;color:#2ecc71;font-weight:600;" id="offerUnlocked"></p>
+        <button class="btn btn-green" id="dlBtn" onclick="downloadPDF()" style="font-size:15px;padding:14px 36px;"></button>
+        <p class="dl-note" id="offerDlNote"></p>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="retry-row">
-    <button class="btn btn-outline" onclick="startQuiz()" id="lRetryBtn"></button>
+<!-- ══ PAYMENT MODAL ══ -->
+<div id="payModal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePayModal()">✕</button>
+
+    <!-- Step 1: Method select -->
+    <div id="payStep1">
+      <div class="modal-header">
+        <div class="modal-logo">🎓</div>
+        <div>
+          <div class="modal-title" id="modalTitleText"></div>
+          <div class="modal-sub">Secure Checkout</div>
+        </div>
+      </div>
+      <div class="modal-amount-box">
+        <div class="modal-amount">₹1.00</div>
+        <div class="modal-amount-desc" id="modalAmountDescText"></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;" id="modalCancelText"></div>
+      </div>
+      <div class="modal-methods">
+        <div class="modal-method active" id="methodUPI" onclick="selectMethod('upi')">
+          <span class="modal-method-icon">📱</span>
+          <div style="flex:1">
+            <div class="modal-method-name" id="methodUPIName"></div>
+            <div class="modal-method-sub" id="methodUPISub"></div>
+          </div>
+          <div class="modal-radio"></div>
+        </div>
+        <div class="modal-method" id="methodCard" onclick="selectMethod('card')">
+          <span class="modal-method-icon">💳</span>
+          <div style="flex:1">
+            <div class="modal-method-name" id="methodCardName"></div>
+            <div class="modal-method-sub" id="methodCardSub"></div>
+          </div>
+          <div class="modal-radio"></div>
+        </div>
+      </div>
+      <div id="upiField">
+        <input class="upi-field" id="upiInput" placeholder="yourname@upi" autocomplete="off"/>
+      </div>
+      <button class="modal-pay-btn" id="payNowBtn" onclick="processPayment()"></button>
+      <div class="modal-secure" id="modalSecureText"></div>
+    </div>
+
+    <!-- Step 2: Processing -->
+    <div id="payStep2" class="hidden">
+      <div class="modal-processing">
+        <div class="processing-spinner">⏳</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:6px;" id="processingTitleText"></div>
+        <div style="font-size:12px;color:var(--muted);" id="processingSubText"></div>
+        <div class="processing-bar"><div class="processing-fill" id="processingFill"></div></div>
+        <div style="font-size:11px;color:var(--muted);" id="processingWaitText"></div>
+      </div>
+    </div>
+
+    <!-- Step 3: Success -->
+    <div id="payStep3" class="hidden">
+      <div class="modal-success">
+        <div class="success-emoji">🎉</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#2ecc71;margin-bottom:8px;" id="successTitleText"></div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:22px;" id="successSubText"></p>
+        <button class="modal-pay-btn" id="successBtnText" onclick="closeAndUnlock()" style="background:linear-gradient(135deg,#2ecc71,#27ae60);"></button>
+        <div class="modal-secure" style="margin-top:10px;" id="successRenewText"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -340,17 +455,45 @@ const T={
     cardDesc:"10 questions covering all 10 UGC NET Paper 1 units, from Teaching Aptitude to Higher Education — includes a live Reading Comprehension passage and Data Interpretation table.",
     cardTags:["10 Questions","All 10 Units","RC Passage","DI Table","~7 mins"],
     cardBtn:"Begin Diagnosis →",
-    retryBtn:"← Attempt Again",
-    couponPrompt:"Have a coupon code? Enter it below to unlock your full report:",
-    applyBtn:"Apply →",
-    couponErr:"❌ Invalid coupon. Try again.",
-    couponOk:"🎉 Unlocked! Scroll down to download.",
+    back:"← Back",
+    nextBtn:"Next →",
+    resultsTitle:"Your Diagnostic Report",
+    lblCorrect:"Correct",lblIncorrect:"Incorrect",lblAccuracy:"Accuracy",lblAvgQ:"Avg / Qn",
+    lblRadar:"Performance Radar",lblBreakdown:"Unit Breakdown",
+    lblLock:"🔒 Pay ₹1 to reveal",
+    weakTitle:"⚠ Weak Zones Identified",
+    noWeak:"✅ No major weaknesses! Strong performance across all units.",
+    unitOf:"Unit",unitOfSuffix:"of 10",qOf:"Question",qOfSuffix:"of",
+    subHigh:"🎉 Excellent! You're on track for 45+ marks. Download your full report below.",
+    subMid:"📈 Decent attempt — focused work on weak zones can push you past 45. Download your report.",
+    subLow:"⚠ Significant gaps found. Get your personalised study plan below.",
     unitLabels:["Teaching Aptitude","Research Aptitude","Reading Comprehension","Communication","Mathematical Reasoning","Logical Reasoning","Data Interpretation","ICT","People & Environment","Higher Education"],
     unitShort:["Teach","Research","RC","Comm","Math","Logic","DI","ICT","Env","HiEdu"],
-    subHigh:"🎉 Excellent! You're on track for 45+ marks. Your full report is below.",
-    subMid:"📈 Decent attempt — focused work on weak zones can push you past 45. See your report.",
-    subLow:"⚠ Significant gaps found. Unlock your report to get your personalised study plan.",
-    noWeak:"No major weaknesses! Strong performance across all units.",
+    weakTag:"Weak",strongTag:"Strong",overallLabel:"Overall",
+    offerTitle:"Complete Paper 1 Study Pack",
+    offerSub:"Personalised PDF report + Complete Paper 1 Paid Study Material. Access everything for 2 days — renews automatically within 2 days.",
+    offerFeats:["✓ Personalised PDF Report","✓ Year-wise Weightage 2019–2024","✓ All 10 Unit Deep Analysis","✓ 45+ Marks Study Plan","✓ High-Yield Topics per Unit","✓ Past Paper Patterns","✓ Weak Zone Action Plan","✓ 2-Day Full Access"],
+    offerPriceSub:"2-day trial · Auto-renews within 2 days · Cancel anytime",
+    offerCTA:"⚡ Download PDF & Start Trial — ₹1",
+    offerTrialNote:"Cancel anytime · Auto-renews within 2 days",
+    offerSecure:"🔒 Secure payment · Report generated on-device · No data shared",
+    offerUnlocked:"✅ Unlocked! Your full study pack is ready.",
+    dlBtn:"⬇ Download PDF Report",
+    offerDlNote:"Instant PDF · Generated from your results · 2-day access active",
+    modalTitle:"UGC NET Paper 1 Trial",
+    modalAmountDesc:"2-Day Full Access · Auto-renews within 2 days",
+    modalCancel:"Cancel anytime before renewal",
+    upiLabel:"UPI",upiSub:"GPay · PhonePe · Paytm · Any UPI",
+    cardLabel:"Card",cardSub:"Debit / Credit · Visa · Mastercard",
+    payBtn:"Pay ₹1 & Start Trial →",
+    modalSecure:"🔒 256-bit SSL · Powered by Razorpay · Cancel anytime",
+    processingTitle:"Processing Payment…",
+    processingSub:"Verifying your transaction securely",
+    processingWait:"Please wait · Do not close this window",
+    successTitle:"Payment Successful!",
+    successSub:"Your 2-day trial is now active. Full study pack unlocked — download your PDF report below.",
+    successBtn:"✅ Access My Study Pack →",
+    successRenew:"Auto-renews within 2 days · Cancel anytime",
     weakTips:{
       teaching:"Revise Bloom's Taxonomy (6 levels), teaching methods, and learner-centred approaches.",
       research:"Focus on research types, sampling methods, and the research process flow.",
@@ -365,33 +508,61 @@ const T={
     }
   },
   hi:{
-    homeSub:"सभी Paper 1 यूनिट्स पर 10 प्रश्न — RC गद्यांश और DI टेबल सहित। कमज़ोर यूनिट्स जानें। लक्ष्य: 45+ अंक।",
+    homeSub:"सभी Paper 1 यूनिट्स पर 10 प्रश्न — RC गद्यांश और DI टेबल सहित। अपनी कमज़ोर यूनिट्स जानें। लक्ष्य: 45+ अंक।",
     cardName:"Paper 1 पूर्ण डायग्नोस्टिक",
-    cardDesc:"UGC NET Paper 1 के सभी 10 यूनिट्स पर 10 प्रश्न — RC गद्यांश और DI टेबल सहित।",
+    cardDesc:"UGC NET Paper 1 के सभी 10 यूनिट्स पर 10 प्रश्न — शिक्षण अभिवृत्ति से उच्च शिक्षा तक — RC गद्यांश और DI टेबल सहित।",
     cardTags:["10 प्रश्न","सभी 10 यूनिट","RC गद्यांश","DI टेबल","~7 मिनट"],
     cardBtn:"डायग्नोसिस शुरू करें →",
-    retryBtn:"← फिर से प्रयास करें",
-    couponPrompt:"कूपन कोड है? पूरी रिपोर्ट अनलॉक करने के लिए दर्ज करें:",
-    applyBtn:"लागू करें →",
-    couponErr:"❌ अमान्य कूपन। पुनः प्रयास करें।",
-    couponOk:"🎉 अनलॉक! नीचे स्क्रॉल करें।",
+    back:"← वापस",
+    nextBtn:"अगला →",
+    resultsTitle:"आपकी डायग्नोस्टिक रिपोर्ट",
+    lblCorrect:"सही",lblIncorrect:"गलत",lblAccuracy:"सटीकता",lblAvgQ:"औसत / प्रश्न",
+    lblRadar:"प्रदर्शन रडार",lblBreakdown:"यूनिट विश्लेषण",
+    lblLock:"🔒 ₹1 में अनलॉक करें",
+    weakTitle:"⚠ कमज़ोर क्षेत्र चिन्हित",
+    noWeak:"✅ कोई बड़ी कमज़ोरी नहीं! उत्कृष्ट प्रदर्शन।",
+    unitOf:"यूनिट",unitOfSuffix:"में से 10",qOf:"प्रश्न",qOfSuffix:"में से",
+    subHigh:"🎉 बेहतरीन! आप 45+ अंक की राह पर हैं। नीचे अपनी पूरी रिपोर्ट डाउनलोड करें।",
+    subMid:"📈 ठीक-ठाक। कमज़ोर यूनिट्स पर काम करके 45+ तक पहुँच सकते हैं।",
+    subLow:"⚠ महत्वपूर्ण कमियाँ मिली हैं। नीचे अपनी व्यक्तिगत स्टडी प्लान पाएं।",
     unitLabels:["शिक्षण अभिवृत्ति","अनुसंधान अभिवृत्ति","पठन-बोध","संचार","गणितीय तर्क","तार्किक तर्क","डेटा व्याख्या","ICT","पर्यावरण व विकास","उच्च शिक्षा"],
     unitShort:["शिक्षण","अनुसंधान","RC","संचार","गणित","तर्क","DI","ICT","पर्यावरण","उच्च शिक्षा"],
-    subHigh:"🎉 बेहतरीन! 45+ की राह पर हैं।",
-    subMid:"📈 ठीक-ठाक। कमज़ोर यूनिट्स पर काम ज़रूरी है।",
-    subLow:"⚠ महत्वपूर्ण कमियाँ। रिपोर्ट अनलॉक करें।",
-    noWeak:"कोई बड़ी कमज़ोरी नहीं! उत्कृष्ट प्रदर्शन।",
+    weakTag:"कमज़ोर",strongTag:"मज़बूत",overallLabel:"कुल",
+    offerTitle:"संपूर्ण Paper 1 स्टडी पैक",
+    offerSub:"व्यक्तिगत PDF रिपोर्ट + Paper 1 का पूरा पेड स्टडी मटेरियल। 2 दिनों के लिए सब कुछ एक्सेस करें — हर 2 दिन में स्वचालित नवीनीकरण।",
+    offerFeats:["✓ व्यक्तिगत PDF रिपोर्ट","✓ वर्षवार वेटेज 2019–2024","✓ सभी 10 यूनिट गहन विश्लेषण","✓ 45+ अंकों की स्टडी प्लान","✓ उच्च-उपज विषय प्रति यूनिट","✓ पिछली परीक्षाओं के पैटर्न","✓ कमज़ोर यूनिट एक्शन प्लान","✓ 2 दिन पूर्ण एक्सेस"],
+    offerPriceSub:"2 दिन का ट्रायल · 2 दिन में स्वतः नवीनीकरण · कभी भी रद्द करें",
+    offerCTA:"⚡ PDF डाउनलोड करें और ट्रायल शुरू करें — ₹1",
+    offerTrialNote:"कभी भी रद्द करें · 2 दिन में स्वतः नवीनीकरण",
+    offerSecure:"🔒 सुरक्षित भुगतान · रिपोर्ट डिवाइस पर बनती है · कोई डेटा शेयर नहीं",
+    offerUnlocked:"✅ अनलॉक! आपका पूरा स्टडी पैक तैयार है।",
+    dlBtn:"⬇ PDF रिपोर्ट डाउनलोड करें",
+    offerDlNote:"तत्काल PDF · आपके परिणामों से · 2 दिन एक्सेस सक्रिय",
+    modalTitle:"UGC NET Paper 1 ट्रायल",
+    modalAmountDesc:"2 दिन पूर्ण एक्सेस · 2 दिन में स्वतः नवीनीकरण",
+    modalCancel:"नवीनीकरण से पहले कभी भी रद्द करें",
+    upiLabel:"UPI",upiSub:"GPay · PhonePe · Paytm · कोई भी UPI",
+    cardLabel:"कार्ड",cardSub:"डेबिट / क्रेडिट · Visa · Mastercard",
+    payBtn:"₹1 भुगतान करें और ट्रायल शुरू करें →",
+    modalSecure:"🔒 256-bit SSL · Razorpay द्वारा · कभी भी रद्द करें",
+    processingTitle:"भुगतान प्रक्रिया जारी…",
+    processingSub:"आपके लेनदेन को सुरक्षित रूप से जाँचा जा रहा है",
+    processingWait:"कृपया प्रतीक्षा करें · विंडो बंद न करें",
+    successTitle:"भुगतान सफल!",
+    successSub:"आपका 2 दिन का ट्रायल सक्रिय है। पूरा स्टडी पैक अनलॉक — नीचे PDF डाउनलोड करें।",
+    successBtn:"✅ मेरा स्टडी पैक एक्सेस करें →",
+    successRenew:"2 दिन में स्वतः नवीनीकरण · कभी भी रद्द करें",
     weakTips:{
-      teaching:"ब्लूम का वर्गीकरण (6 स्तर), शिक्षण विधियाँ दोहराएं।",
-      research:"अनुसंधान के प्रकार, नमूनाकरण और प्रक्रिया प्रवाह समझें।",
-      comprehension:"प्रतिदिन संपादकीय गद्यांश पढ़ें।",
-      communication:"Shannon-Weaver मॉडल और बाधाएं गहराई से समझें।",
-      mathematical:"संख्या श्रृंखला और औसत की दैनिक प्रैक्टिस।",
-      logical:"न्यायवाक्य, कोडिंग-डिकोडिंग पर काम करें।",
-      data:"बार चार्ट, पाई चार्ट और टेबल अभ्यास करें।",
-      ict:"साइबर सुरक्षा और ई-लर्निंग कवर करें।",
-      environment:"ब्रंटलैंड, 17 SDGs और पर्यावरण कानून पर ध्यान दें।",
-      highered:"UGC अधिनियम 1956, NAAC और NEP 2020 दोहराएं।"
+      teaching:"ब्लूम का वर्गीकरण (6 स्तर), शिक्षण विधियाँ और छात्र-केंद्रित दृष्टिकोण दोहराएं।",
+      research:"अनुसंधान के प्रकार, नमूनाकरण विधियाँ और अनुसंधान प्रक्रिया प्रवाह समझें।",
+      comprehension:"प्रतिदिन संपादकीय गद्यांश पढ़ें। निहितार्थ-आधारित प्रश्नों पर ध्यान दें।",
+      communication:"Shannon-Weaver मॉडल: एन्कोडिंग, डिकोडिंग, फीडबैक और बाधाएं गहराई से समझें।",
+      mathematical:"संख्या श्रृंखला, औसत और अनुपात-समानुपात की दैनिक प्रैक्टिस करें।",
+      logical:"न्यायवाक्य, कोडिंग-डिकोडिंग, रक्त संबंध और सादृश्य पर काम करें।",
+      data:"बार चार्ट, पाई चार्ट और टेबल को समय सीमा में पढ़ने का अभ्यास करें।",
+      ict:"साइबर सुरक्षा (फिशिंग, मैलवेयर, फायरवॉल) और ई-लर्निंग (LMS, MOOC) कवर करें।",
+      environment:"ब्रंटलैंड सतत विकास, 17 SDGs और भारत के पर्यावरण कानून पर ध्यान दें।",
+      highered:"UGC अधिनियम 1956, NAAC मान्यता और NEP 2020 की प्रमुख धाराएं दोहराएं।"
     }
   }
 };
@@ -445,22 +616,49 @@ let currentQ=0, userAnswers=[], dotStates=[], qTimer=null, qSeconds=35, qStartTi
 let savedResults=null, isUnlocked=false;
 
 /* ─── LANG ──────────────────────────────────── */
+function S(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function H(id,v){const e=document.getElementById(id);if(e)e.innerHTML=v;}
+
 function setLang(l){
   lang=l;
   document.body.classList.toggle('hindi',l==='hi');
   document.getElementById('btnEN').className='lang-btn'+(l==='en'?' active':'');
   document.getElementById('btnHI').className='lang-btn'+(l==='hi'?' active':'');
   const d=T[l];
-  document.getElementById('lHomeSub').textContent=d.homeSub;
-  document.getElementById('lCardName').textContent=d.cardName;
-  document.getElementById('lCardDesc').textContent=d.cardDesc;
-  document.getElementById('lCardBtn').textContent=d.cardBtn;
-  document.getElementById('lRetryBtn').textContent=d.retryBtn;
-  document.getElementById('lCouponPrompt').textContent=d.couponPrompt;
-  document.getElementById('lApplyBtn').textContent=d.applyBtn;
+
+  // HOME
+  S('lHomeSub',d.homeSub);S('lCardName',d.cardName);S('lCardDesc',d.cardDesc);S('lCardBtn',d.cardBtn);
   const ct=document.getElementById('lCardTags');
-  ct.innerHTML='';
-  d.cardTags.forEach(t=>{const s=document.createElement('span');s.className='tag';s.textContent=t;ct.appendChild(s);});
+  if(ct){ct.innerHTML='';d.cardTags.forEach(t=>{const s=document.createElement('span');s.className='tag';s.textContent=t;ct.appendChild(s);});}
+
+  // QUIZ
+  S('backBtnQuiz',d.back);S('nextBtn',d.nextBtn);
+
+  // RESULTS — static labels
+  S('backBtnResults',d.back);S('resultsTitle',d.resultsTitle);
+  S('lblCorrect',d.lblCorrect);S('lblIncorrect',d.lblIncorrect);
+  S('lblAccuracy',d.lblAccuracy);S('lblAvgQ',d.lblAvgQ);
+  S('lblRadar',d.lblRadar);S('lblBreakdown',d.lblBreakdown);
+  S('lblLock1',d.lblLock);S('lblLock2',d.lblLock);
+
+  // OFFER BOX
+  S('offerTitle',d.offerTitle);S('offerSub',d.offerSub);
+  S('offerPriceSub',d.offerPriceSub);S('offerCTA',d.offerCTA);
+  S('offerTrialNote',d.offerTrialNote);S('offerSecure',d.offerSecure);
+  S('offerUnlocked',d.offerUnlocked);S('dlBtn',d.dlBtn);S('offerDlNote',d.offerDlNote);
+  const of=document.getElementById('offerFeats');
+  if(of){of.innerHTML='';d.offerFeats.forEach(f=>{const s=document.createElement('span');s.className='offer-feat';s.textContent=f;of.appendChild(s);});}
+
+  // PAYMENT MODAL
+  S('modalTitleText',d.modalTitle);S('modalAmountDescText',d.modalAmountDesc);
+  S('modalCancelText',d.modalCancel);
+  S('methodUPIName',d.upiLabel);S('methodUPISub',d.upiSub);
+  S('methodCardName',d.cardLabel);S('methodCardSub',d.cardSub);
+  S('payNowBtn',d.payBtn);S('modalSecureText',d.modalSecure);
+  S('processingTitleText',d.processingTitle);S('processingSubText',d.processingSub);
+  S('processingWaitText',d.processingWait);
+  S('successTitleText',d.successTitle);S('successSubText',d.successSub);
+  S('successBtnText',d.successBtn);S('successRenewText',d.successRenew);
 }
 
 /* ─── NAV ───────────────────────────────────── */
@@ -474,18 +672,15 @@ function goHome(){clearInterval(qTimer);show('home');}
 function startQuiz(){
   currentQ=0;
   userAnswers=Array(QB[lang].length).fill(null);
-  dotStates=Array(QB[lang].length).fill(null); // {selected, correct}
+  dotStates=Array(QB[lang].length).fill(null);
   totalTimeSpent=0;
   savedResults=null;
   isUnlocked=false;
-  // Reset results page state
   const res=document.getElementById('results');
   res.classList.remove('unlocked');res.classList.add('locked');
   document.getElementById('couponSection').classList.remove('hidden');
   document.getElementById('downloadArea').classList.add('hidden');
-  document.getElementById('couponInput').value='';
-  document.getElementById('couponInput').className='coupon-input';
-  document.getElementById('couponMsg').textContent='';
+  document.getElementById('payModal').classList.add('hidden');
   buildDots(QB[lang].length);
   show('quiz');
   loadQuestion(0);
@@ -500,9 +695,10 @@ function loadQuestion(idx){
   clearInterval(qTimer);qSeconds=35;qStartTime=Date.now();
   const qs=QB[lang],q=qs[idx];
   const uIdx=UNITS.findIndex(u=>u.key===q.key);
-  document.getElementById('qUnitKey').textContent=`Unit ${uIdx+1} of 10`;
-  document.getElementById('qUnitLabel').textContent=T[lang].unitLabels[uIdx];
-  document.getElementById('progressText').textContent=`Question ${idx+1} of ${qs.length}`;
+  const d=T[lang];
+  document.getElementById('qUnitKey').textContent=`${d.unitOf} ${uIdx+1} ${d.unitOfSuffix}`;
+  document.getElementById('qUnitLabel').textContent=d.unitLabels[uIdx];
+  document.getElementById('progressText').textContent=`${d.qOf} ${idx+1} ${d.qOfSuffix} ${qs.length}`;
   const pct=Math.round((idx/qs.length)*100);
   document.getElementById('progressPct').textContent=pct+'%';
   document.getElementById('progressFill').style.width=pct+'%';
@@ -561,15 +757,16 @@ function renderResults(){
   const correct=ua.filter((a,i)=>a===qs[i].ans).length;
   const pct=Math.round((correct/qs.length)*100);
   const avgT=Math.round(totalTimeSpent/qs.length);
-  const labs=T['en'].unitLabels;
+  const labs=T['en'].unitLabels; // always EN keys for PDF
   const wt=T['en'].weakTips;
+  const d=T[lang]; // display language
 
   document.getElementById('scoreCorrect').textContent=correct;
   document.getElementById('scoreWrong').textContent=qs.length-correct;
   document.getElementById('scorePct').textContent=pct+'%';
   document.getElementById('scoreTime').textContent=avgT+'s';
   document.getElementById('resultsSub').textContent=
-    pct>=70?T[lang].subHigh:pct>=50?T[lang].subMid:T[lang].subLow;
+    pct>=70?d.subHigh:pct>=50?d.subMid:d.subLow;
 
   const us={};
   UNITS.forEach(u=>{us[u.key]={correct:0,total:0};});
@@ -586,10 +783,10 @@ function renderResults(){
     const color=p<50?'var(--crimson)':p<75?'var(--gold)':'#2ecc71';
     const row=document.createElement('div');row.className='unit-row';
     row.innerHTML=`
-      <span class="unit-name">${T[lang].unitLabels[i]}</span>
+      <span class="unit-name">${d.unitLabels[i]}</span>
       <div class="unit-bar-wrap"><div class="unit-bar blur-target" id="bar_${u.key}" style="width:0%;background:${color}"></div></div>
       <span class="unit-score blur-target" id="sc_${u.key}">${s.correct}/${s.total}</span>
-      <span class="blur-target">${p<50?`<span class="weak-tag">Weak</span>`:p===100?`<span class="strong-tag">Strong</span>`:''}</span>`;
+      <span class="blur-target">${p<50?`<span class="weak-tag">${d.weakTag}</span>`:p===100?`<span class="strong-tag">${d.strongTag}</span>`:''}</span>`;
     bl.appendChild(row);
     setTimeout(()=>{const b=document.getElementById('bar_'+u.key);if(b)b.style.width=p+'%';},160);
   });
@@ -598,12 +795,12 @@ function renderResults(){
   const wa=document.getElementById('weaknessAlert');
   if(wArr.length===0){
     wa.style.cssText='background:rgba(46,204,113,.07);border:1px solid rgba(46,204,113,.25);border-radius:14px;padding:22px 26px;margin-bottom:24px;';
-    wa.innerHTML=`<h3 style="color:#2ecc71;font-family:Playfair Display,serif;font-size:1rem;">✅ ${T[lang].noWeak}</h3>`;
+    wa.innerHTML=`<h3 style="color:#2ecc71;font-family:Playfair Display,serif;font-size:1rem;">${d.noWeak}</h3>`;
   } else {
     wa.style.cssText='background:rgba(224,80,80,.07);border:1px solid rgba(224,80,80,.25);border-radius:14px;padding:22px 26px;margin-bottom:24px;';
-    let html=`<h3 style="color:var(--crimson);font-family:Playfair Display,serif;font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;">⚠ Weak Zones Identified</h3><ul class="weakness-list">`;
+    let html=`<h3 style="color:var(--crimson);font-family:Playfair Display,serif;font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;">${d.weakTitle}</h3><ul class="weakness-list">`;
     wArr.sort((a,b)=>a.pct-b.pct).forEach(({key,label,pct})=>{
-      html+=`<li class="blur-target"><span><strong>${label}</strong> (${pct}%) — ${wt[key]||''}</span></li>`;
+      html+=`<li class="blur-target"><span><strong>${lang==='hi'?d.unitLabels[UNITS.findIndex(u=>u.key===key)]:label}</strong> (${pct}%) — ${lang==='hi'?d.weakTips[key]:wt[key]||''}</span></li>`;
     });
     html+='</ul>';
     wa.innerHTML=html;
@@ -639,7 +836,7 @@ function drawRadar(us){
   const ov=sc.reduce((a,b)=>a+b,0)/sc.length;
   ctx.font='bold 18px serif';ctx.fillStyle=ov<.5?'#e05050':'#e8a020';
   ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(Math.round(ov*100)+'%',cx,cy-6);
-  ctx.font='500 9px sans-serif';ctx.fillStyle='rgba(232,160,32,.55)';ctx.fillText('Overall',cx,cy+12);
+  ctx.font='500 9px sans-serif';ctx.fillStyle='rgba(232,160,32,.55)';ctx.fillText(T[lang].overallLabel,cx,cy+12);
 }
 
 function launchConfetti(){
@@ -653,24 +850,52 @@ function launchConfetti(){
   setTimeout(()=>w.remove(),5000);
 }
 
-/* ─── COUPON ────────────────────────────────── */
-const VALID='SUPER';
-function applyCoupon(){
-  const inp=document.getElementById('couponInput');
-  const msg=document.getElementById('couponMsg');
-  if(inp.value.trim().toUpperCase()===VALID){
-    inp.className='coupon-input ok-state';
-    msg.className='coupon-msg ok';
-    msg.textContent=T[lang].couponOk;
-    setTimeout(unlockResults, 600);
-  } else {
-    inp.className='coupon-input shake';
-    setTimeout(()=>inp.className='coupon-input',450);
-    msg.className='coupon-msg err';
-    msg.textContent=T[lang].couponErr;
-  }
+/* ─── PAYMENT MODAL ─────────────────────────── */
+let selectedMethod='upi';
+
+function openPayModal(){
+  document.getElementById('payModal').classList.remove('hidden');
+  document.getElementById('payStep1').classList.remove('hidden');
+  document.getElementById('payStep2').classList.add('hidden');
+  document.getElementById('payStep3').classList.add('hidden');
+  document.getElementById('upiInput').value='';
+  document.getElementById('payNowBtn').disabled=false;
+  document.getElementById('payNowBtn').textContent='Pay ₹1 & Start Trial →';
+  selectMethod('upi');
+}
+function closePayModal(){document.getElementById('payModal').classList.add('hidden');}
+
+function selectMethod(m){
+  selectedMethod=m;
+  document.getElementById('methodUPI').className='modal-method'+(m==='upi'?' active':'');
+  document.getElementById('methodCard').className='modal-method'+(m==='card'?' active':'');
+  document.getElementById('upiField').style.display=m==='upi'?'block':'none';
 }
 
+function processPayment(){
+  const btn=document.getElementById('payNowBtn');
+  if(selectedMethod==='upi'){
+    const upi=document.getElementById('upiInput').value.trim();
+    if(!upi){document.getElementById('upiInput').style.borderColor='var(--crimson)';return;}
+  }
+  btn.disabled=true;
+  document.getElementById('payStep1').classList.add('hidden');
+  document.getElementById('payStep2').classList.remove('hidden');
+  // Animate progress bar
+  setTimeout(()=>{document.getElementById('processingFill').style.width='100%';},80);
+  // Simulate payment success at 2.6s
+  setTimeout(()=>{
+    document.getElementById('payStep2').classList.add('hidden');
+    document.getElementById('payStep3').classList.remove('hidden');
+  },2700);
+}
+
+function closeAndUnlock(){
+  closePayModal();
+  unlockResults();
+}
+
+/* ─── UNLOCK ─────────────────────────────────── */
 function unlockResults(){
   isUnlocked=true;
   const res=document.getElementById('results');
